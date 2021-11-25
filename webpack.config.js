@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 // const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
@@ -14,16 +15,28 @@ const config = {
     clean: true,
   },
   devServer: {
-    open: true,
+    // open: true,
     host: 'localhost',
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './src/index.html',
     }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'src/data'),
+          to: path.resolve(__dirname, 'dist/data'),
+        },
+      ],
+    }),
   ],
   module: {
     rules: [
+      {
+        test: /\.html$/i,
+        use: 'html-loader',
+      },
       {
         test: /\.(ts|tsx)$/i,
         loader: 'ts-loader',
@@ -41,6 +54,9 @@ const config = {
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
+    fallback: {
+      events: require.resolve('events/'),
+    },
   },
 };
 
