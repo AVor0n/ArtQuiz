@@ -13,6 +13,8 @@ function questionController() {
   const imageEl: HTMLImageElement = document.querySelector('.task-image');
   const answersEl: NodeListOf<HTMLButtonElement> = document.querySelectorAll('.task-answer');
   const timerValue: HTMLElement = document.querySelector('.timer-value');
+  const resultMessage: HTMLSpanElement = document.querySelector('.result-message');
+  const modal: HTMLDivElement = document.querySelector('.modal');
 
   game.newRound(gamemode, category);
 
@@ -27,20 +29,36 @@ function questionController() {
   game.timer.start();
 
   for (const answerEl of answersEl) {
-    answerEl.addEventListener('click', () => {
+    answerEl.addEventListener('click', async (e: Event) => {
+      const target: HTMLButtonElement = e.target as HTMLButtonElement;
       game.timer.stop();
       const point = game.currentRound.checkAnswer(answerEl.textContent);
-      const task = game.currentRound.nextTask();
 
-      if (task) {
-        renderTask(task, questionEl, imageEl, answersEl);
-        game.timer.restart();
-      } else {
-        const progressArr: boolean[] = game.currentRound.progress;
-        const correctAnswers: number = progressArr.reduce((acc, x) => {
-          return acc + Number(x);
-        }, 0);
-      }
+      if (point) target.classList.add('correct');
+      else target.classList.add('uncorrect');
+
+      const promise: Promise<Task> = new Promise((resolve) => {
+        setTimeout(() => {
+          target.classList.remove('correct');
+          target.classList.remove('uncorrect');
+          const task = game.currentRound.nextTask();
+          resolve(task);
+        }, 1000);
+      });
+
+      promise.then((task: Task) => {
+        if (task) {
+          renderTask(task, questionEl, imageEl, answersEl);
+          game.timer.restart();
+        } else {
+          const progressArr: boolean[] = game.currentRound.progress;
+          const correctAnswers: number = progressArr.reduce((acc, x) => {
+            return acc + Number(x);
+          }, 0);
+          resultMessage.textContent = `Правильных ответов ${correctAnswers} из ${game.currentRound.countLevels}`;
+          modal.classList.toggle('hide');
+        }
+      });
     });
   }
   btnGotoHome.addEventListener('click', () => {
