@@ -1,0 +1,24 @@
+.categories-container{
+  display: grid;
+  gap: 2rem;
+  padding: 2rem;
+
+  font-size: 4rem;
+}
+
+.categories-header{
+  display: flex;
+}
+
+.categories-list-item{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.categories-list{
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}

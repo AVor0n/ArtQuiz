@@ -1,0 +1,21 @@
+.btn{
+  width: 100%;
+  padding: 2rem;
+
+  text-align: center;
+  text-decoration: none;
+
+  border-radius: 1rem;
+}
+
+.btn-primary{
+  color: white;
+
+  background-color: blue;
+}
+
+.btn-secondary {
+  color: blue;
+
+  border: 0.25rem solid blue;
+}

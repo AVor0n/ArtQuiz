@@ -1,1 +1,12 @@
-@import './reset.css'
+@import './reset.css';
+
+@import './_app.css';
+@import './_home.css';
+@import './_categories.css';
+@import './_settings.css';
+@import './_question.css';
+
+@import './_btn.css';
+@import './_input-checkbox.css';
+
+/* @import './_input-range.css'; */

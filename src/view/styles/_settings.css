@@ -1,0 +1,57 @@
+.settings-container{
+  display: grid;
+  grid-template-rows: 1fr auto;
+  align-items: center;
+  height: 100vh;
+  padding: 2rem;
+
+  color: blue;
+
+  font-size: 4rem;
+}
+
+.settings-options{
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+  align-items: center;
+}
+
+.settings-option{
+  width: 100%;
+
+  text-align: center;
+
+  border: 0.25rem solid blue;
+  border-radius: 3rem;
+}
+
+.settings-option-label{
+  display: block;
+  width: 100%;
+  padding: 1rem;
+
+  color: white;
+  text-align: center;
+
+  background-color: blue;
+
+  border-radius: 2.5rem;
+}
+
+.settings-nav{
+  display: flex;
+  gap: 1rem;
+}
+
+.input-range{
+  width: 30%;
+
+  transform: scale(2.5);
+}
+
+.option-value-container{
+  display: flex;
+  justify-content: space-between;
+  margin: 0 2rem;
+}
