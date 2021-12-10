@@ -86,7 +86,7 @@ class Round {
   static #createRandomArr(answer: string, array: string[], length: number = 4) {
     const randArr: string[] = [answer];
 
-    for (let i = 0; i < length; i++) {
+    for (let i = 1; i < length; i++) {
       let j;
       do {
         j = Math.floor(Math.random() * array.length + 1);
@@ -95,8 +95,7 @@ class Round {
       randArr.push(array[j]);
     }
 
-    shuffle(randArr);
-    return randArr;
+    return shuffle(randArr);
   }
 }
 
